@@ -1,0 +1,12 @@
+.active {
+  color: red;
+}
+li {
+  cursor: pointer;
+  list-style: none;
+  transition: all 0.5s;
+}
+.box-hobby {
+  padding: 30px;
+  transition: all 1s;
+}
