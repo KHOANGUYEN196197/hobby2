@@ -1,14 +1,22 @@
 import { useEffect, useState } from "react";
-import { activeHobby, addNewHobby, deleteHobby } from "../../action/hobby";
+import {
+  activeHobby,
+  addNewHobby,
+  deleteHobby,
+  editHobby,
+  filterHobby,
+} from "../../action/hobby";
 import HobbyList from "../../component/HobbyList";
 
 import { useDispatch, useSelector } from "react-redux";
 
 function Hobby() {
   const hobbyList = useSelector((state) => state.hobby.list);
+  const hobbyListFilter = useSelector((state) => state.hobby.listFilter);
   const hobbyId = useSelector((state) => state.hobby.activeId);
   const dispatch = useDispatch();
   const [hobby, setHobby] = useState("");
+  const [hobbyFilter, setHobbyFilter] = useState("");
   const randomNumber = () => {
     return 1000 + Math.trunc(Math.random() * 9000);
   };
@@ -30,6 +38,10 @@ function Hobby() {
   const changeHobby = (event) => {
     setHobby(event.target.value);
   };
+  const changeHobbyFilter = (event) => {
+    setHobbyFilter(event.target.value);
+    console.log(hobbyFilter);
+  };
   const addHobbyByInput = () => {
     if (hobby) {
       const newHobby = {
@@ -40,22 +52,57 @@ function Hobby() {
       setHobby("");
     }
   };
+  const clickEditHobby = (hobby) => {
+    if (hobby) {
+      dispatch(editHobby(hobby));
+    }
+  };
+  const filterHobbyByName = () => {
+    console.log("vo day", hobbyFilter);
+    dispatch(filterHobby(hobbyFilter));
+  };
   return (
-    <div className="box-hobby">
-      <button onClick={addHobbyByRandom}>Random Hobby</button> &nbsp;OR &nbsp;
+    <div className="box-hobby" style={{ padding: 30 }}>
+      <button className="width-btn" onClick={addHobbyByRandom}>
+        Random Hobby
+      </button>{" "}
+      &nbsp;OR &nbsp;
       <input
         type="text"
         name="hobby"
         value={hobby}
         onChange={(event) => changeHobby(event)}
       />
-      <button onClick={addHobbyByInput}>Add</button>
+      &nbsp;
+      <button className="width-btn" onClick={addHobbyByInput}>
+        Add
+      </button>
+      &nbsp; &nbsp;
+      {hobbyList.length > 0 ? (
+        <>
+          <label for="filterHobby">Filter by Name</label> &nbsp;
+          <input
+            type="text"
+            name="hobbyFilter"
+            value={hobbyFilter}
+            onChange={(event) => changeHobbyFilter(event)}
+          />
+          &nbsp;
+          <button className="width-btn" onClick={filterHobbyByName}>
+            Filter
+          </button>
+        </>
+      ) : (
+        ""
+      )}
       <br /> <br />
       <HobbyList
+        hobbyListFilter={hobbyListFilter}
         hobbyList={hobbyList}
         hobbyId={hobbyId}
         onClickActive={clickHobby}
         onClickDeleteHobby={clickDeleteHobby}
+        onClickEditHobby={clickEditHobby}
       />
     </div>
   );

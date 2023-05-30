@@ -1,12 +1,50 @@
-.active {
-  color: red;
-}
-li {
-  cursor: pointer;
-  list-style: none;
-  transition: all 0.5s;
-}
-.box-hobby {
+.container {
   padding: 30px;
-  transition: all 1s;
+}
+.box {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.hobbyItem {
+  width: 20%;
+  height: 100px;
+  padding: 15px;
+  box-shadow: 0.5px 0.5px 6px rgba(183, 195, 203, 0.9);
+  border-radius: 16px;
+  margin: 0 0 12px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: default;
+}
+
+.active {
+  background-color: #4caf50;
+  color: white;
+}
+.box-btn {
+  display: flex;
+  justify-content: space-between;
+}
+button {
+  background-color: #0a0a23;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 6px 0;
+  width: 45%;
+  cursor: pointer;
+}
+input {
+  background: #ffffff;
+  padding: 10px 10px 10px 16px;
+  border: 1px solid #727f88;
+  border-radius: 4px;
+}
+.width-btn {
+  width: 115px;
+}
+.hobbyName {
+  cursor: pointer;
 }
