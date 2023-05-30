@@ -1,6 +1,9 @@
+import LIST_HOBBY from "../constants/mockData";
+
 const initialState = {
-  list: [],
+  list: LIST_HOBBY,
   activeId: null,
+  listFilter: [],
 };
 
 const hobbyReducer = (state = initialState, action) => {
@@ -27,6 +30,32 @@ const hobbyReducer = (state = initialState, action) => {
         ...state,
         list: newList,
       };
+    case "EDIT_HOBBY":
+      newList = [...state.list];
+      const index = newList.findIndex(
+        (element) => element.hobbyId === action.payload.hobbyId
+      );
+      const updatedElement = action.payload;
+
+      newList[index] = updatedElement;
+      return {
+        ...state,
+        list: newList,
+      };
+    case "FILTER_HOBBY":
+      if (action.payload) {
+        newList = [...state.list];
+        newList = newList.find((hobby) => hobby.hobbyName === action.payload);
+        return {
+          ...state,
+          listFilter: [newList],
+        };
+      } else {
+        return {
+          ...state,
+          listFilter: [],
+        };
+      }
 
     default:
       return state;

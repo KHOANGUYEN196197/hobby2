@@ -17,3 +17,16 @@ export const deleteHobby = (hobby) => {
     payload: hobby,
   };
 };
+
+export const editHobby = (hobby) => {
+  return {
+    type: "EDIT_HOBBY",
+    payload: hobby,
+  };
+};
+export const filterHobby = (hobby) => {
+  return {
+    type: "FILTER_HOBBY",
+    payload: hobby,
+  };
+};
