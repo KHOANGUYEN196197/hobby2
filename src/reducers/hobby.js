@@ -45,10 +45,10 @@ const hobbyReducer = (state = initialState, action) => {
     case "FILTER_HOBBY":
       if (action.payload) {
         newList = [...state.list];
-        newList = newList.find((hobby) => hobby.hobbyName === action.payload);
+        newList = newList.filter((hobby) => hobby.hobbyName === action.payload);
         return {
           ...state,
-          listFilter: [newList],
+        listFilter: newList,
         };
       } else {
         return {
